@@ -1,0 +1,46 @@
+.chessboard {
+    display: flex;
+    flex-wrap: wrap;
+    width: 800px;
+    height: 800px;
+    margin: auto;
+}
+
+
+.square {
+    width: 100px;
+    height: 100px;
+}
+
+.white {
+    background-color: #f0d9b5;
+}
+
+.black {
+    background-color: #b58863;
+}
+
+.square {
+    position: relative;
+}
+
+.square img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Пример позиционирования для фигуры "белая пешка" */
+.square.white.pawn img {
+    content: url('path_to_white_pawn_image.png');
+}
+
+/* Пример позиционирования для фигуры "черная пешка" */
+.square.black.pawn img {
+    content: url('path_to_black_pawn_image.png');
+}
+
+/* Повторите стили для каждой фигуры и клетки */
