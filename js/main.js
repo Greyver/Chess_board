@@ -9,20 +9,108 @@ const array = [
     [ 81, 82, 83, 84, 85, 86, 87, 88 ],
 ];
 
-const black_figure = [11, 12, 13, 14, 15, 16, 17, 18];
-const black_pawns = [21, 22, 23, 24, 25, 26, 27, 28];
-const white_figure = [71, 72, 73, 74, 75, 76, 77, 78];
-const white_pawns = [81, 82, 83, 84, 85, 86, 87, 88];
+let array_b_figyge = [
+    [11, 12, 13, 14, 15, 16, 17, 18],//!black_figure
+    [21, 22, 23, 24, 25, 26, 27, 28],//!black_pawns
+]
+
+let array_w_figyge = [
+    [71, 72, 73, 74, 75, 76, 77, 78],//!white_figure
+    [81, 82, 83, 84, 85, 86, 87, 88],//!white_pawns
+]
+
+url = 'image/point.png';
+
+function add(mass, url){
+    mass.forEach(function(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            const image = document.createElement('img');
+            image.src = url;
+            element.appendChild(image);
+    }
+});
+}
+
+function rook(id) {
+    let l = Math.floor(id/10);
+    let r = id % 10;
+    let m_rook = [];
+    let flag = true;
+    for (let i = l; i > 0; i--)
+    {
+        if (i+r == l+r)
+            continue;
+        if (array_w_figyge.some(arr => arr.includes(i*10 + r)))
+            break;
+        m_rook.push(i*10+r);
+        if (array_b_figyge.some(arr => arr.includes(i*10 + r)))
+            break;
+    }
+    for (let i = l; i < 9; i++)
+    {
+        if (i+r == l+r)
+            continue;
+        if (array_w_figyge.some(arr => arr.includes(i*10 + r)))
+            break;
+        m_rook.push(i*10+r);
+        if (array_b_figyge.some(arr => arr.includes(i*10 + r)))
+            break;
+    }
+    for (let i = r; i < 9; i++)
+    {
+        if (l*10+i == l*10+r)
+            continue;
+        if (array_w_figyge.some(arr => arr.includes(l*10 + i)))
+            break;
+        m_rook.push(l*10+i);
+        if (array_b_figyge.some(arr => arr.includes(l*10 + i)))
+            break;
+    }
+    for (let i = r; i > 0; i--)
+    {
+        if (l*10+i == l*10+r)
+            continue;
+        if (array_w_figyge.some(arr => arr.includes(l*10 + i)))
+            break;
+        m_rook.push(l*10+i);
+        if (array_b_figyge.some(arr => arr.includes(l*10 + i)))
+            break;
+    }
+    console.log(m_rook);
+    return m_rook;
+}
 
 const images = document.querySelectorAll('.image');
 
 function handleClick(event) {
     const clickedImage = event.target;
-    const altText = clickedImage.alt;
+    const altText = clickedImage.alt;// class
+    const id = event.target.parentElement.id;//id teg
+    
     switch (altText) {
         case "b_rook 1":
         case "b_rook 2":
-            console.log('work');
+            let move = rook(id);//! don`t workind{
+            add(move, url);
+            console.log(id);
+            function handleClick(event) {
+                const clickedImage = event.target;
+                const altText = clickedImage.alt;// class
+                const id = event.target.parentElement.id;//id teg
+                const newId = parseInt(id);
+                const targetDiv = document.getElementById(newId.toString());
+                targetDiv.innerHTML = '';
+                targetDiv.appendChild(event.target);
+            }
+            move.forEach((divId) => {
+                const div = document.getElementById(divId);
+                const images = div.getElementsByTagName("img");
+                for (let i = images.length - 1; i >= 0; i--) {
+                    const image = images[i];
+                    image.parentNode.removeChild(image);
+                }
+                });//!}
             break;
         case "b_knight 1":
         case "b_knight 2":

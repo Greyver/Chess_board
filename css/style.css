@@ -33,14 +33,10 @@
     object-fit: contain;
 }
 
-/* Пример позиционирования для фигуры "белая пешка" */
 .square.white.pawn img {
     content: url('path_to_white_pawn_image.png');
 }
 
-/* Пример позиционирования для фигуры "черная пешка" */
 .square.black.pawn img {
     content: url('path_to_black_pawn_image.png');
 }
-
-/* Повторите стили для каждой фигуры и клетки */
